@@ -1,55 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dado 3D</title>
+<title>Dado Pro</title>
 
 <style>
+
 body{
-background:#0f172a;
-color:white;
+margin:0;
 font-family:Arial;
+color:white;
 text-align:center;
-margin-top:80px;
+background:linear-gradient(270deg,#0f172a,#020617,#1e293b);
+background-size:600% 600%;
+animation:fondo 10s infinite;
 }
 
-.scene{
-width:120px;
-height:120px;
-margin:auto;
-perspective:900px;
+@keyframes fondo{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
-.cube{
-width:120px;
-height:120px;
-position:relative;
-transform-style:preserve-3d;
-transform: rotateX(-25deg) rotateY(25deg);
-transition: transform 1.5s;
+h1{
+margin-top:60px;
 }
 
-.face{
-position:absolute;
-width:120px;
-height:120px;
-background:white;
-border:3px solid black;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:40px;
-color:black;
+#dice{
+font-size:120px;
+margin:30px;
+transition: transform 0.7s;
 }
-
-.front{ transform:rotateY(0deg) translateZ(60px); }
-.back{ transform:rotateY(180deg) translateZ(60px); }
-.right{ transform:rotateY(90deg) translateZ(60px); }
-.left{ transform:rotateY(-90deg) translateZ(60px); }
-.top{ transform:rotateX(90deg) translateZ(60px); }
-.bottom{ transform:rotateX(-90deg) translateZ(60px); }
 
 button{
-margin-top:40px;
 padding:15px 40px;
 font-size:22px;
 border:none;
@@ -62,6 +44,12 @@ cursor:pointer;
 button:hover{
 background:#0ea5e9;
 }
+
+#stats{
+margin-top:30px;
+font-size:18px;
+}
+
 </style>
 
 </head>
@@ -70,50 +58,56 @@ background:#0ea5e9;
 
 <h1>🎲 Tirar el Dado</h1>
 
-<div class="scene">
-<div class="cube" id="cube">
-
-<div class="face front">⚀</div>
-<div class="face back">⚅</div>
-<div class="face right">⚂</div>
-<div class="face left">⚃</div>
-<div class="face top">⚁</div>
-<div class="face bottom">⚄</div>
-
-</div>
-</div>
+<div id="dice">⚀</div>
 
 <button onclick="rollDice()">Tirar dado</button>
 
 <h2 id="resultado"></h2>
 
+<div id="stats">
+1️⃣: <span id="c1">0</span> |
+2️⃣: <span id="c2">0</span> |
+3️⃣: <span id="c3">0</span> |
+4️⃣: <span id="c4">0</span> |
+5️⃣: <span id="c5">0</span> |
+6️⃣: <span id="c6">0</span>
+</div>
+
+<audio id="sound">
+<source src="https://www.soundjay.com/misc/sounds/dice-roll-1.mp3">
+</audio>
+
 <script>
+
+let contador=[0,0,0,0,0,0];
 
 function rollDice(){
 
-let numero = Math.floor(Math.random()*6)+1;
+let numero=Math.floor(Math.random()*6)+1;
 
-let cube = document.getElementById("cube");
+let dados=["⚀","⚁","⚂","⚃","⚄","⚅"];
 
-let rotaciones = {
-1:"rotateX(0deg) rotateY(0deg)",
-2:"rotateX(-90deg) rotateY(0deg)",
-3:"rotateY(-90deg)",
-4:"rotateY(90deg)",
-5:"rotateX(90deg)",
-6:"rotateY(180deg)"
-};
+document.getElementById("dice").style.transform=
+"rotate("+(Math.random()*720)+"deg)";
 
-cube.style.transform =
-"rotateX("+(Math.random()*1000)+"deg) rotateY("+(Math.random()*1000)+"deg)";
+document.getElementById("sound").play();
 
 setTimeout(()=>{
-cube.style.transform = rotaciones[numero];
 
-document.getElementById("resultado").innerHTML =
-"Salió el número: " + numero;
+document.getElementById("dice").innerHTML=dados[numero-1];
 
-},1000);
+document.getElementById("resultado").innerHTML=
+"Salió el número: "+numero;
+
+contador[numero-1]++;
+
+for(let i=1;i<=6;i++){
+
+document.getElementById("c"+i).innerHTML=contador[i-1];
+
+}
+
+},300);
 
 }
 
