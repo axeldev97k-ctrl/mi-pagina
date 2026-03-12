@@ -39,7 +39,7 @@ width:150px;
 height:150px;
 position:relative;
 transform-style:preserve-3d;
-transition:transform 1.3s;
+transition:transform 1.2s;
 }
 
 .face{
@@ -85,11 +85,6 @@ button:hover{
 background:#0ea5e9;
 }
 
-#resultado{
-margin-top:20px;
-font-size:24px;
-}
-
 </style>
 </head>
 
@@ -102,48 +97,52 @@ font-size:24px;
 <div class="scene">
 <div class="cube" id="cube">
 
+<!-- 1 -->
 <div class="face front">
 <div></div><div></div><div></div>
 <div></div><div class="dot"></div><div></div>
 <div></div><div></div><div></div>
 </div>
 
+<!-- 6 -->
 <div class="face back">
 <div class="dot"></div><div></div><div class="dot"></div>
-<div></div><div class="dot"></div><div></div>
+<div class="dot"></div><div></div><div class="dot"></div>
 <div class="dot"></div><div></div><div class="dot"></div>
 </div>
 
+<!-- 3 -->
 <div class="face right">
-<div class="dot"></div><div></div><div class="dot"></div>
+<div class="dot"></div><div></div><div></div>
 <div></div><div class="dot"></div><div></div>
-<div class="dot"></div><div></div><div class="dot"></div>
+<div></div><div></div><div class="dot"></div>
 </div>
 
+<!-- 4 -->
 <div class="face left">
 <div class="dot"></div><div></div><div class="dot"></div>
 <div></div><div></div><div></div>
 <div class="dot"></div><div></div><div class="dot"></div>
 </div>
 
+<!-- 5 -->
 <div class="face top">
 <div class="dot"></div><div></div><div class="dot"></div>
 <div></div><div class="dot"></div><div></div>
-<div></div><div></div><div></div>
+<div></div><div></div><div class="dot"></div>
 </div>
 
+<!-- 2 -->
 <div class="face bottom">
+<div class="dot"></div><div></div><div></div>
 <div></div><div></div><div></div>
-<div class="dot"></div><div></div><div class="dot"></div>
-<div></div><div></div><div></div>
+<div></div><div></div><div class="dot"></div>
 </div>
 
 </div>
 </div>
 
 <button onclick="roll()">Tirar dado</button>
-
-<div id="resultado"></div>
 
 <script>
 
@@ -168,9 +167,6 @@ let extraY=360*(Math.floor(Math.random()*3)+1);
 cube.style.transform=
 `rotateX(${extraX}deg) rotateY(${extraY}deg) `+
 rotaciones[numero];
-
-document.getElementById("resultado").innerText=
-"Salió el número: "+numero;
 
 }
 
