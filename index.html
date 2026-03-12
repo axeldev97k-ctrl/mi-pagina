@@ -29,7 +29,7 @@ width:150px;
 height:150px;
 position:relative;
 transform-style:preserve-3d;
-transition:transform 1s;
+transition:transform 1s ease-out;
 }
 
 .face{
@@ -102,87 +102,39 @@ border-radius:8px;
 <div class="cube" id="cube">
 
 <div class="face front">
-<div class="hidden"></div>
-<div class="hidden"></div>
-<div class="hidden"></div>
-
-<div class="hidden"></div>
-<div class="dot"></div>
-<div class="hidden"></div>
-
-<div class="hidden"></div>
-<div class="hidden"></div>
-<div class="hidden"></div>
+<div class="hidden"></div><div class="hidden"></div><div class="hidden"></div>
+<div class="hidden"></div><div class="dot"></div><div class="hidden"></div>
+<div class="hidden"></div><div class="hidden"></div><div class="hidden"></div>
 </div>
 
 <div class="face back">
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
-
-<div class="hidden"></div>
-<div class="dot"></div>
-<div class="hidden"></div>
-
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="hidden"></div><div class="dot"></div><div class="hidden"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
 </div>
 
 <div class="face right">
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
-
-<div class="hidden"></div>
-<div class="hidden"></div>
-<div class="hidden"></div>
-
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="hidden"></div><div class="hidden"></div><div class="hidden"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
 </div>
 
 <div class="face left">
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
-
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
-
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
 </div>
 
 <div class="face top">
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
-
-<div class="hidden"></div>
-<div class="dot"></div>
-<div class="hidden"></div>
-
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="hidden"></div><div class="dot"></div><div class="hidden"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
 </div>
 
 <div class="face bottom">
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
-
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
-
-<div class="dot"></div>
-<div class="hidden"></div>
-<div class="dot"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
 </div>
 
 </div>
@@ -211,23 +163,22 @@ function roll(){
 
 let n=Math.floor(Math.random()*6)+1;
 
-let rotaciones={
-1:"rotateX(0deg) rotateY(0deg)",
-2:"rotateX(-90deg)",
-3:"rotateY(90deg)",
-4:"rotateY(-90deg)",
-5:"rotateX(90deg)",
-6:"rotateY(180deg)"
+let base={
+1:[0,0],
+2:[-90,0],
+3:[0,90],
+4:[0,-90],
+5:[90,0],
+6:[0,180]
 };
 
 let spinX=360*(Math.floor(Math.random()*3)+2);
 let spinY=360*(Math.floor(Math.random()*3)+2);
 
-cube.style.transform="rotateX("+spinX+"deg) rotateY("+spinY+"deg)";
+let finalX=spinX+base[n][0];
+let finalY=spinY+base[n][1];
 
-setTimeout(()=>{
-
-cube.style.transform=rotaciones[n];
+cube.style.transform=`rotateX(${finalX}deg) rotateY(${finalY}deg)`;
 
 document.getElementById("resultado").innerHTML="Salió el número: "+n;
 
@@ -236,8 +187,6 @@ contador[n-1]++;
 for(let i=1;i<=6;i++){
 document.getElementById("c"+i).innerHTML=contador[i-1];
 }
-
-},900);
 
 }
 
