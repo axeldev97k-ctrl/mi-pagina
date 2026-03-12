@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dado 3D Pro</title>
+<title>Dado 3D</title>
 
 <style>
 
 body{
 margin:0;
-font-family:Arial;
 background:#020617;
 color:white;
+font-family:Arial;
 text-align:center;
-overflow:hidden;
 }
 
 h1{
@@ -26,8 +25,8 @@ perspective:600px;
 }
 
 .cube{
-width:100%;
-height:100%;
+width:150px;
+height:150px;
 position:relative;
 transform-style:preserve-3d;
 transition:transform 1s;
@@ -39,9 +38,10 @@ width:150px;
 height:150px;
 background:white;
 border:4px solid #ddd;
-display:flex;
-flex-wrap:wrap;
-padding:20px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+grid-template-rows:repeat(3,1fr);
+padding:15px;
 box-sizing:border-box;
 }
 
@@ -50,7 +50,12 @@ width:20px;
 height:20px;
 background:black;
 border-radius:50%;
-margin:auto;
+justify-self:center;
+align-self:center;
+}
+
+.hidden{
+visibility:hidden;
 }
 
 .front{ transform: rotateY(0deg) translateZ(75px); }
@@ -73,11 +78,11 @@ margin:10px;
 
 #stats{
 margin-top:30px;
-font-size:20px;
 display:flex;
 justify-content:center;
 gap:20px;
 flex-wrap:wrap;
+font-size:20px;
 }
 
 .stat{
@@ -97,34 +102,87 @@ border-radius:8px;
 <div class="cube" id="cube">
 
 <div class="face front">
+<div class="hidden"></div>
+<div class="hidden"></div>
+<div class="hidden"></div>
+
+<div class="hidden"></div>
 <div class="dot"></div>
+<div class="hidden"></div>
+
+<div class="hidden"></div>
+<div class="hidden"></div>
+<div class="hidden"></div>
 </div>
 
 <div class="face back">
-<div class="dot"></div><div></div><div class="dot"></div>
-<div></div><div class="dot"></div><div></div>
+<div class="dot"></div>
+<div class="hidden"></div>
+<div class="dot"></div>
+
+<div class="hidden"></div>
+<div class="dot"></div>
+<div class="hidden"></div>
+
+<div class="dot"></div>
+<div class="hidden"></div>
 <div class="dot"></div>
 </div>
 
 <div class="face right">
-<div class="dot"></div><div></div><div class="dot"></div>
+<div class="dot"></div>
+<div class="hidden"></div>
+<div class="dot"></div>
+
+<div class="hidden"></div>
+<div class="hidden"></div>
+<div class="hidden"></div>
+
+<div class="dot"></div>
+<div class="hidden"></div>
+<div class="dot"></div>
 </div>
 
 <div class="face left">
-<div class="dot"></div><div></div><div class="dot"></div>
-<div></div><div class="dot"></div><div></div>
+<div class="dot"></div>
+<div class="hidden"></div>
+<div class="dot"></div>
+
+<div class="dot"></div>
+<div class="hidden"></div>
+<div class="dot"></div>
+
+<div class="dot"></div>
+<div class="hidden"></div>
 <div class="dot"></div>
 </div>
 
 <div class="face top">
-<div class="dot"></div><div></div><div class="dot"></div>
-<div class="dot"></div><div></div><div class="dot"></div>
+<div class="dot"></div>
+<div class="hidden"></div>
+<div class="dot"></div>
+
+<div class="hidden"></div>
+<div class="dot"></div>
+<div class="hidden"></div>
+
+<div class="dot"></div>
+<div class="hidden"></div>
+<div class="dot"></div>
 </div>
 
 <div class="face bottom">
-<div class="dot"></div><div></div><div class="dot"></div>
-<div></div><div class="dot"></div><div></div>
-<div class="dot"></div><div></div><div class="dot"></div>
+<div class="dot"></div>
+<div class="hidden"></div>
+<div class="dot"></div>
+
+<div class="dot"></div>
+<div class="hidden"></div>
+<div class="dot"></div>
+
+<div class="dot"></div>
+<div class="hidden"></div>
+<div class="dot"></div>
 </div>
 
 </div>
@@ -147,7 +205,6 @@ border-radius:8px;
 <script>
 
 let contador=[0,0,0,0,0,0];
-
 const cube=document.getElementById("cube");
 
 function roll(){
@@ -163,7 +220,10 @@ let rotaciones={
 6:"rotateY(180deg)"
 };
 
-cube.style.transform="rotateX(720deg) rotateY(720deg)";
+let spinX=360*(Math.floor(Math.random()*3)+2);
+let spinY=360*(Math.floor(Math.random()*3)+2);
+
+cube.style.transform="rotateX("+spinX+"deg) rotateY("+spinY+"deg)";
 
 setTimeout(()=>{
 
@@ -177,7 +237,7 @@ for(let i=1;i<=6;i++){
 document.getElementById("c"+i).innerHTML=contador[i-1];
 }
 
-},1000);
+},900);
 
 }
 
@@ -190,7 +250,6 @@ document.getElementById("c"+i).innerHTML=0;
 }
 
 document.getElementById("resultado").innerHTML="";
-
 cube.style.transform="rotateX(0deg) rotateY(0deg)";
 
 }
