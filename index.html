@@ -16,7 +16,7 @@ margin-top:80px;
 width:120px;
 height:120px;
 margin:auto;
-perspective:600px;
+perspective:900px;
 }
 
 .cube{
@@ -24,7 +24,8 @@ width:120px;
 height:120px;
 position:relative;
 transform-style:preserve-3d;
-transition: transform 1s;
+transform: rotateX(-25deg) rotateY(25deg);
+transition: transform 1.5s;
 }
 
 .face{
@@ -96,17 +97,23 @@ let cube = document.getElementById("cube");
 
 let rotaciones = {
 1:"rotateX(0deg) rotateY(0deg)",
-2:"rotateX(-90deg)",
+2:"rotateX(-90deg) rotateY(0deg)",
 3:"rotateY(-90deg)",
 4:"rotateY(90deg)",
 5:"rotateX(90deg)",
 6:"rotateY(180deg)"
 };
 
+cube.style.transform =
+"rotateX("+(Math.random()*1000)+"deg) rotateY("+(Math.random()*1000)+"deg)";
+
+setTimeout(()=>{
 cube.style.transform = rotaciones[numero];
 
 document.getElementById("resultado").innerHTML =
 "Salió el número: " + numero;
+
+},1000);
 
 }
 
