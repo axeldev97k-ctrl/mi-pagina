@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dado 3D</title>
+<title>Dado Galáctico</title>
 
 <style>
 
@@ -10,7 +10,7 @@ margin:0;
 font-family:Arial;
 color:white;
 text-align:center;
-background:#020617;
+background:black;
 overflow:hidden;
 }
 
@@ -18,7 +18,25 @@ canvas{
 position:fixed;
 top:0;
 left:0;
+z-index:-2;
+}
+
+#galaxy{
+position:fixed;
+width:400px;
+height:400px;
+background:radial-gradient(circle,rgba(120,80,255,0.6),transparent 70%);
+border-radius:50%;
+filter:blur(40px);
+animation:spin 40s linear infinite;
 z-index:-1;
+top:20%;
+left:60%;
+}
+
+@keyframes spin{
+from{transform:rotate(0deg)}
+to{transform:rotate(360deg)}
 }
 
 h1{
@@ -29,7 +47,7 @@ margin-top:60px;
 width:150px;
 height:150px;
 margin:80px auto;
-perspective:600px;
+perspective:700px;
 }
 
 .cube{
@@ -93,46 +111,47 @@ background:#0ea5e9;
 <body>
 
 <canvas id="stars"></canvas>
+<div id="galaxy"></div>
 
-<h1>🎲 Tirar el Dado</h1>
+<h1>🎲 Dado Galáctico</h1>
 
 <div class="scene">
 <div class="cube" id="cube">
 
 <div class="face front">
-<div class="hidden"></div><div class="hidden"></div><div class="hidden"></div>
-<div class="hidden"></div><div class="dot"></div><div class="hidden"></div>
-<div class="hidden"></div><div class="hidden"></div><div class="hidden"></div>
+<div></div><div></div><div></div>
+<div></div><div class="dot"></div><div></div>
+<div></div><div></div><div></div>
 </div>
 
 <div class="face back">
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
-<div class="hidden"></div><div class="dot"></div><div class="hidden"></div>
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="dot"></div><div></div><div class="dot"></div>
+<div></div><div class="dot"></div><div></div>
+<div class="dot"></div><div></div><div class="dot"></div>
 </div>
 
 <div class="face right">
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
-<div class="hidden"></div><div class="hidden"></div><div class="hidden"></div>
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="dot"></div><div></div><div class="dot"></div>
+<div></div><div></div><div></div>
+<div class="dot"></div><div></div><div class="dot"></div>
 </div>
 
 <div class="face left">
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="dot"></div><div></div><div class="dot"></div>
+<div class="dot"></div><div></div><div class="dot"></div>
+<div class="dot"></div><div></div><div class="dot"></div>
 </div>
 
 <div class="face top">
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
-<div class="hidden"></div><div class="dot"></div><div class="hidden"></div>
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="dot"></div><div></div><div class="dot"></div>
+<div></div><div class="dot"></div><div></div>
+<div class="dot"></div><div></div><div class="dot"></div>
 </div>
 
 <div class="face bottom">
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
-<div class="dot"></div><div class="hidden"></div><div class="dot"></div>
+<div class="dot"></div><div></div><div class="dot"></div>
+<div class="dot"></div><div></div><div class="dot"></div>
+<div class="dot"></div><div></div><div class="dot"></div>
 </div>
 
 </div>
@@ -175,13 +194,13 @@ document.getElementById("resultado").innerHTML="Salió el número: "+n;
 
 document.getElementById("sound").play();
 
-crearParticulas();
+explosion();
 
 }
 
-function crearParticulas(){
+function explosion(){
 
-for(let i=0;i<20;i++){
+for(let i=0;i<25;i++){
 
 let p=document.createElement("div");
 
@@ -195,17 +214,17 @@ p.style.top="50%";
 
 document.body.appendChild(p);
 
-let x=(Math.random()-0.5)*400;
-let y=(Math.random()-0.5)*400;
+let x=(Math.random()-0.5)*500;
+let y=(Math.random()-0.5)*500;
 
 p.animate([
 {transform:"translate(0,0)",opacity:1},
 {transform:`translate(${x}px,${y}px)`,opacity:0}
 ],{
-duration:800
+duration:900
 });
 
-setTimeout(()=>p.remove(),800);
+setTimeout(()=>p.remove(),900);
 
 }
 
@@ -219,7 +238,7 @@ canvas.height=window.innerHeight;
 
 let stars=[];
 
-for(let i=0;i<120;i++){
+for(let i=0;i<150;i++){
 stars.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
